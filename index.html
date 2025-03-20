@@ -27,11 +27,20 @@
     <script>
         async function loadLinks() {
             try {
-                const response = await fetch('links.json', {cache: "no-cache"});
-                if (!response.ok) throw new Error('Failed to load links');
-                const links = await response.json();
-                if (!Array.isArray(links) || links.length === 0) throw new Error('No links found');
+                const sheetId = "1xvCg9iKuz96QSMZS1Mxe5JPEKzFrqROML_soWsrW1Uc";
+                const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
+
+                const response = await fetch(url);
+                const text = await response.text();
+                const json = JSON.parse(text.substring(47, text.length - 2));
                 
+                const links = json.table.rows.map(row => ({
+                    name: row.c[0].v,
+                    url: row.c[1].v
+                }));
+
+                if (!Array.isArray(links) || links.length === 0) throw new Error('No links found');
+
                 const linksContainer = document.getElementById('links-container');
                 linksContainer.innerHTML = '';
                 links.forEach(link => {
@@ -45,7 +54,7 @@
                 });
             } catch (error) {
                 console.error(error.message);
-                document.getElementById('links-container').innerHTML = '<p class="text-red-500 font-semibold">⚠️ Failed to load links. Please check if links.json is accessible.</p>';
+                document.getElementById('links-container').innerHTML = '<p class="text-red-500 font-semibold">⚠️ Failed to load links from Google Sheets.</p>';
             }
         }
         document.addEventListener('DOMContentLoaded', loadLinks);
