@@ -16,34 +16,35 @@
                 links.forEach(link => {
                     const a = document.createElement('a');
                     a.href = link.url;
-                    a.className = "flex items-center justify-center bg-gray-200 p-4 rounded-xl shadow-md hover:bg-gray-300 transition duration-300 transform hover:scale-105";
-                    a.innerHTML = `<span class="text-md font-medium text-gray-800">${link.name}</span>`;
+                    a.target = "_blank";
+                    a.className = "flex items-center justify-center bg-gray-200 p-4 rounded-xl shadow-lg hover:bg-gray-300 transition duration-300 transform hover:scale-105 focus:ring-2 focus:ring-gray-400";
+                    a.innerHTML = `<span class="text-md font-semibold text-gray-800">${link.name}</span>`;
                     linksContainer.appendChild(a);
                 });
             } catch (error) {
                 console.error(error);
-                document.getElementById('links-container').innerHTML = '<p class="text-red-500">Failed to load links. Please try again later.</p>';
+                document.getElementById('links-container').innerHTML = '<p class="text-red-500 font-semibold">⚠️ Failed to load links. Try again later.</p>';
             }
         }
         document.addEventListener('DOMContentLoaded', loadLinks);
     </script>
 </head>
-<body class="bg-gradient-to-r from-gray-100 to-gray-300 flex items-center justify-center min-h-screen">
+<body class="bg-gradient-to-br from-gray-100 to-gray-300 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-3xl shadow-2xl w-96 text-center border border-gray-300 transform transition duration-500 hover:scale-105">
         <!-- Profile Section -->
-        <img src="https://drive.google.com/thumbnail?id=1cAyUKdzILJSDF-QOJnhIFHwbW90vZduX" class="mx-auto rounded-full border-4 border-gray-400 w-24 h-24 shadow-lg" alt="Profile Image">
+        <img src="https://drive.google.com/thumbnail?id=1cAyUKdzILJSDF-QOJnhIFHwbW90vZduX" loading="lazy" class="mx-auto rounded-full border-4 border-gray-400 w-24 h-24 shadow-lg" alt="Profile Image">
         <h2 class="text-3xl font-extrabold mt-3 text-gray-800">TeeWearIndia</h2>
         <p class="text-sm text-gray-500 mt-1">⭐ Printed Luxury T-Shirts | 🛒 Trendy Fashion | Premium Quality</p>
         
         <!-- Social Icons -->
         <div class="flex justify-center space-x-6 my-4">
-            <a href="https://www.instagram.com/teewearindia" target="_blank" class="transform transition duration-300 hover:scale-110">
+            <a href="https://www.instagram.com/teewearindia" target="_blank" class="transition duration-300 hover:scale-110 focus:ring-2 focus:ring-pink-400">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="w-10 h-10" alt="Instagram Logo">
             </a>
-            <a href="https://www.facebook.com/teewearindia" target="_blank" class="transform transition duration-300 hover:scale-110">
+            <a href="https://www.facebook.com/teewearindia" target="_blank" class="transition duration-300 hover:scale-110 focus:ring-2 focus:ring-blue-400">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="w-10 h-10" alt="Facebook Logo">
             </a>
-            <a href="https://www.youtube.com/teewearindia" target="_blank" class="transform transition duration-300 hover:scale-110">
+            <a href="https://www.youtube.com/teewearindia" target="_blank" class="transition duration-300 hover:scale-110 focus:ring-2 focus:ring-red-400">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/502px-Logo_of_YouTube_%282015-2017%29.svg.png" class="w-10 h-10" alt="YouTube Logo">
             </a>
         </div>
