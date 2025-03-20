@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeeWearIndia | Premium T-Shirts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        async function loadLinks() {
+            try {
+                const response = await fetch('links.json');
+                if (!response.ok) throw new Error('Failed to load links');
+                const links = await response.json();
+                const linksContainer = document.getElementById('links-container');
+                linksContainer.innerHTML = '';
+                links.forEach(link => {
+                    const a = document.createElement('a');
+                    a.href = link.url;
+                    a.className = "flex items-center justify-center bg-gray-200 p-4 rounded-xl shadow-md hover:bg-gray-300 transition duration-300 transform hover:scale-105";
+                    a.innerHTML = `<span class="text-md font-medium text-gray-800">${link.name}</span>`;
+                    linksContainer.appendChild(a);
+                });
+            } catch (error) {
+                console.error(error);
+                document.getElementById('links-container').innerHTML = '<p class="text-red-500">Failed to load links. Please try again later.</p>';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', loadLinks);
+    </script>
+</head>
+<body class="bg-gradient-to-r from-gray-100 to-gray-300 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-3xl shadow-2xl w-96 text-center border border-gray-300 transform transition duration-500 hover:scale-105">
+        <!-- Profile Section -->
+        <img src="https://drive.google.com/thumbnail?id=1cAyUKdzILJSDF-QOJnhIFHwbW90vZduX" class="mx-auto rounded-full border-4 border-gray-400 w-24 h-24 shadow-lg" alt="Profile Image">
+        <h2 class="text-3xl font-extrabold mt-3 text-gray-800">TeeWearIndia</h2>
+        <p class="text-sm text-gray-500 mt-1">⭐ Printed Luxury T-Shirts | 🛒 Trendy Fashion | Premium Quality</p>
+        
+        <!-- Social Icons -->
+        <div class="flex justify-center space-x-6 my-4">
+            <a href="https://www.instagram.com/teewearindia" target="_blank" class="transform transition duration-300 hover:scale-110">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="w-10 h-10" alt="Instagram Logo">
+            </a>
+            <a href="https://www.facebook.com/teewearindia" target="_blank" class="transform transition duration-300 hover:scale-110">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="w-10 h-10" alt="Facebook Logo">
+            </a>
+            <a href="https://www.youtube.com/teewearindia" target="_blank" class="transform transition duration-300 hover:scale-110 text-4xl">
+                https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/502px-Logo_of_YouTube_%282015-2017%29.svg.png
+            </a>
+        </div>
+        
+        <h3 class="text-lg font-semibold text-yellow-600 my-3">🛒 Shop Now</h3>
+        
+        <!-- Links -->
+        <div id="links-container" class="mt-4 space-y-4"></div>
+        
+        <!-- Footer -->
+        <p class="text-xs text-gray-500 mt-6">Powered by <span class="font-semibold text-gray-600">TeeWearIndia</span></p>
+    </div>
+</body>
+</html>

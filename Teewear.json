@@ -1,0 +1,27 @@
+[
+    {
+        "name": "🔴 Printed Men Red T-Shirt",
+        "url": "https://bitli.in/fhgux8s",
+        "color": "bg-red-500 hover:bg-red-600"
+    },
+    {
+        "name": "🔵 Printed Men Blue T-Shirt",
+        "url": "https://bitli.in/HxJW8q6",
+        "color": "bg-blue-500 hover:bg-blue-600"
+    },
+    {
+        "name": "⚫ Printed Men Black T-Shirt",
+        "url": "https://example.com/black-tshirt",
+        "color": "bg-gray-800 hover:bg-gray-900"
+    },
+    {
+        "name": "⚪ Printed Men White T-Shirt",
+        "url": "https://example.com/white-tshirt",
+        "color": "bg-gray-200 hover:bg-gray-300"
+    },
+    {
+        "name": "🟢 Printed Men Green T-Shirt",
+        "url": "https://example.com/green-tshirt",
+        "color": "bg-green-500 hover:bg-green-600"
+    }
+]
