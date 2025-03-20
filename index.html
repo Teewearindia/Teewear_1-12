@@ -5,25 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TeeWearIndia | Premium T-Shirts</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .link-button {
+            transition: all 0.3s ease-in-out;
+        }
+        .link-button:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
+        .social-icon:hover {
+            filter: brightness(1.2);
+            transform: scale(1.1);
+        }
+    </style>
     <script>
         async function loadLinks() {
             try {
                 const response = await fetch('links.json');
                 if (!response.ok) throw new Error('Failed to load links');
                 const links = await response.json();
+                if (!Array.isArray(links) || links.length === 0) throw new Error('No links found');
+                
                 const linksContainer = document.getElementById('links-container');
                 linksContainer.innerHTML = '';
                 links.forEach(link => {
                     const a = document.createElement('a');
                     a.href = link.url;
                     a.target = "_blank";
-                    a.className = "flex items-center justify-center bg-gray-200 p-4 rounded-xl shadow-lg hover:bg-gray-300 transition duration-300 transform hover:scale-105 focus:ring-2 focus:ring-gray-400";
-                    a.innerHTML = `<span class="text-md font-semibold text-gray-800">${link.name}</span>`;
+                    a.rel = "noopener noreferrer";
+                    a.className = "link-button flex items-center justify-center bg-gray-200 p-4 rounded-xl shadow-lg hover:bg-gray-300 focus:ring-2 focus:ring-gray-400 text-md font-semibold text-gray-800";
+                    a.innerHTML = `<span>${link.name}</span>`;
                     linksContainer.appendChild(a);
                 });
             } catch (error) {
-                console.error(error);
-                document.getElementById('links-container').innerHTML = '<p class="text-red-500 font-semibold">⚠️ Failed to load links. Try again later.</p>';
+                console.error(error.message);
+                document.getElementById('links-container').innerHTML = '<p class="text-red-500 font-semibold">⚠️ Failed to load links. Please check your internet connection or try again later.</p>';
             }
         }
         document.addEventListener('DOMContentLoaded', loadLinks);
@@ -38,14 +57,14 @@
         
         <!-- Social Icons -->
         <div class="flex justify-center space-x-6 my-4">
-            <a href="https://www.instagram.com/teewearindia" target="_blank" class="transition duration-300 hover:scale-110 focus:ring-2 focus:ring-pink-400">
+            <a href="https://www.instagram.com/teewearindia" target="_blank" class="social-icon transition duration-300 focus:ring-2 focus:ring-pink-400">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="w-10 h-10" alt="Instagram Logo">
             </a>
-            <a href="https://www.facebook.com/teewearindia" target="_blank" class="transition duration-300 hover:scale-110 focus:ring-2 focus:ring-blue-400">
+            <a href="https://www.facebook.com/teewearindia" target="_blank" class="social-icon transition duration-300 focus:ring-2 focus:ring-blue-400">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="w-10 h-10" alt="Facebook Logo">
             </a>
-            <a href="https://www.youtube.com/teewearindia" target="_blank" class="transition duration-300 hover:scale-110 focus:ring-2 focus:ring-red-400">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_social_white_squircle_%282017%29.svg" class="w-10 h-10" alt="YouTube Logo">
+            <a href="https://www.youtube.com/teewearindia" target="_blank" class="social-icon transition duration-300 focus:ring-2 focus:ring-red-400">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/502px-Logo_of_YouTube_%282015-2017%29.svg.png" class="w-12 h-10" alt="YouTube Logo">
             </a>
         </div>
         
