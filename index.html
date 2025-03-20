@@ -11,10 +11,13 @@
         }
         .link-button {
             transition: all 0.3s ease-in-out;
+            background-color: #f3f4f6;
         }
         .link-button:hover {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             transform: scale(1.05);
+            background-color: #6366f1; /* Professional Blue Hover Effect */
+            color: white;
         }
         .social-icon:hover {
             filter: brightness(1.2);
@@ -24,20 +27,11 @@
     <script>
         async function loadLinks() {
             try {
-                const sheetId = "1xvCg9iKuz96QSMZS1Mxe5JPEKzFrqROML_soWsrW1Uc";  // 🔹 आपकी Google Sheet ID
-                const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
-
-                const response = await fetch(url);
-                const text = await response.text();
-                const json = JSON.parse(text.substring(47, text.length - 2)); // 🔹 Raw JSON से डेटा निकालना
-                
-                const links = json.table.rows.map(row => ({
-                    name: row.c[0].v,
-                    url: row.c[1].v
-                }));
-
+                const response = await fetch('links.json', {cache: "no-cache"});
+                if (!response.ok) throw new Error('Failed to load links');
+                const links = await response.json();
                 if (!Array.isArray(links) || links.length === 0) throw new Error('No links found');
-
+                
                 const linksContainer = document.getElementById('links-container');
                 linksContainer.innerHTML = '';
                 links.forEach(link => {
@@ -45,17 +39,16 @@
                     a.href = link.url;
                     a.target = "_blank";
                     a.rel = "noopener noreferrer";
-                    a.className = "link-button flex items-center justify-center bg-gray-200 p-4 rounded-xl shadow-lg hover:bg-gray-300 text-md font-semibold text-gray-800";
+                    a.className = "link-button flex items-center justify-center p-4 rounded-xl shadow-lg text-md font-semibold text-gray-800";
                     a.innerHTML = `<span>${link.name}</span>`;
                     linksContainer.appendChild(a);
                 });
             } catch (error) {
-                console.error(error);
-                document.getElementById('links-container').innerHTML = '<p class="text-red-500 font-semibold">⚠️ Failed to load links.</p>';
+                console.error(error.message);
+                document.getElementById('links-container').innerHTML = '<p class="text-red-500 font-semibold">⚠️ Failed to load links. Please check if links.json is accessible.</p>';
             }
         }
-
-        document.addEventListener("DOMContentLoaded", loadLinks);
+        document.addEventListener('DOMContentLoaded', loadLinks);
     </script>
 </head>
 <body class="bg-gradient-to-br from-gray-100 to-gray-300 flex items-center justify-center min-h-screen">
@@ -64,25 +57,25 @@
         <img src="https://drive.google.com/thumbnail?id=1cAyUKdzILJSDF-QOJnhIFHwbW90vZduX" loading="lazy" class="mx-auto rounded-full border-4 border-gray-400 w-24 h-24 shadow-lg" alt="Profile Image">
         <h2 class="text-3xl font-extrabold mt-3 text-gray-800">TeeWearIndia</h2>
         <p class="text-sm text-gray-500 mt-1">⭐ Printed Luxury T-Shirts | 🛒 Trendy Fashion | Premium Quality</p>
-
+        
         <!-- Social Icons -->
         <div class="flex justify-center space-x-6 my-4">
-            <a href="https://www.instagram.com/teewearindia" target="_blank" class="social-icon transition duration-300">
+            <a href="https://www.instagram.com/teewearindia" target="_blank" class="social-icon transition duration-300 focus:ring-2 focus:ring-pink-400">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="w-10 h-10" alt="Instagram Logo">
             </a>
-            <a href="https://www.facebook.com/teewearindia" target="_blank" class="social-icon transition duration-300">
+            <a href="https://www.facebook.com/teewearindia" target="_blank" class="social-icon transition duration-300 focus:ring-2 focus:ring-blue-400">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="w-10 h-10" alt="Facebook Logo">
             </a>
-            <a href="https://www.youtube.com/teewearindia" target="_blank" class="social-icon transition duration-300">
+            <a href="https://www.youtube.com/teewearindia" target="_blank" class="social-icon transition duration-300 focus:ring-2 focus:ring-red-400">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/502px-Logo_of_YouTube_%282015-2017%29.svg.png" class="w-12 h-10" alt="YouTube Logo">
             </a>
         </div>
-
+        
         <h3 class="text-lg font-semibold text-yellow-600 my-3">🛒 Shop Now</h3>
-
+        
         <!-- Links -->
-        <div id="links-container" class="mt-3.5 space-y-3.5"></div>
-
+        <div id="links-container" class="mt-4 space-y-4"></div>
+        
         <!-- Footer -->
         <p class="text-xs text-gray-500 mt-6">Powered by <span class="font-semibold text-gray-600">TeeWearIndia</span></p>
     </div>
