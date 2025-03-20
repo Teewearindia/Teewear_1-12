@@ -8,6 +8,12 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .content {
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 20px;
         }
         .link-button {
             transition: all 0.3s ease-in-out;
@@ -27,9 +33,9 @@
     <script>
         async function loadLinks() {
             try {
-                const sheetId = "1xvCg9iKuz96QSMZS1Mxe5JPEKzFrqROML_soWsrW1Uc";
+                const sheetId = "1gZLsC7atcstSy_l5YXky0uBUoNVbB79c3syepSB4rrg"; // Updated Sheet ID
                 const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
-
+                
                 const response = await fetch(url);
                 const text = await response.text();
                 const json = JSON.parse(text.substring(47, text.length - 2));
@@ -61,7 +67,7 @@
     </script>
 </head>
 <body class="bg-gradient-to-br from-gray-100 to-gray-300 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-3xl shadow-2xl w-96 text-center border border-gray-300 transform transition duration-500 hover:scale-105">
+    <div class="bg-white p-8 rounded-3xl shadow-2xl w-96 text-center border border-gray-300 transform transition duration-500 hover:scale-105 content">
         <!-- Profile Section -->
         <img src="https://drive.google.com/thumbnail?id=1cAyUKdzILJSDF-QOJnhIFHwbW90vZduX" loading="lazy" class="mx-auto rounded-full border-4 border-gray-400 w-24 h-24 shadow-lg" alt="Profile Image">
         <h2 class="text-3xl font-extrabold mt-3 text-gray-800">TeeWearIndia</h2>
