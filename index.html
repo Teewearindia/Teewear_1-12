@@ -50,9 +50,6 @@
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            const params = new URLSearchParams(window.location.search);
-            const column = params.get("column") || "A"; // Default Column A
-
             const sheetId = "1xvCg9iKuz96QSMZS1Mxe5JPEKzFrqROML_soWsrW1Uc";
             const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
 
@@ -61,11 +58,10 @@
                 const text = await response.text();
                 const json = JSON.parse(text.substring(47, text.length - 2));
 
-                const columnIndex = column.charCodeAt(0) - 65; // Convert A, B, C... to 0, 1, 2...
                 const links = json.table.rows.map(row => ({
-                    name: row.c[columnIndex]?.v || "No Name",
-                    url: row.c[columnIndex + 1]?.v || "#"
-                }));
+                    name: row.c[0] && row.c[0].v ? row.c[0].v : "No Name",
+                    url: row.c[1] && row.c[1].v ? row.c[1].v : "#"
+                })).filter(link => link.url !== "#"); // Remove invalid links
 
                 const linksContainer = document.getElementById('links-container');
                 linksContainer.innerHTML = '';
@@ -99,7 +95,7 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="w-8 sm:w-10 h-8 sm:h-10" alt="Facebook Logo">
             </a>
             <a href="https://www.youtube.com/teewearindia" target="_blank" class="social-icon transition duration-300">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/502px-Logo_of_YouTube_%282015-2017%29. svg.png" class="w-10 sm:w-12 h-8 sm:h-10" alt="YouTube Logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/502px-Logo_of_YouTube_%282015-2017%29.svg.png" class="w-10 sm:w-12 h-8 sm:h-10" alt="YouTube Logo">
             </a>
         </div>
 
